@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Card from './Card';
+import Scoreboard from './Scoreboard';
 
 function App() {
     const [pokemons, setPokemons] = useState([])
@@ -13,7 +15,7 @@ function App() {
 
     const fetchPokemons = async () => {
         const newPokemons = [];
-        for (let i = 1; i <= 6; i++) {  // Fetch 6 random Pokémon
+        for (let i = 1; i <= 6; i++) { 
           const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
           newPokemons.push({
             id: res.data.id,
@@ -45,10 +47,14 @@ function App() {
 
     return (
         <div className="App">
-          
+            <Scoreboard score={score} bestScore={bestScore} />
+            <div className="card-container">
+                {pokemons.map(pokemon => (
+                    <Card key={pokemon.id} pokemon={pokemon} onClick={handleCardClick} />
+                ))}
+            </div>
         </div>
       );
-
 }
 
 export default App;
