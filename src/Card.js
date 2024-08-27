@@ -1,10 +1,15 @@
 import React from 'react';
 
-function Card({ pokemon, onClick }) {
+function Card({ pokemon, isFlipping, onClick }) {
   return (
-    <div className="card" onClick={() => onClick(pokemon.id)}>
-      <img src={pokemon.image} alt={pokemon.name} />
-      <h3>{pokemon.name}</h3>
+    <div className={`card ${isFlipping ? 'is-flipping' : ''}`} onClick={() => onClick(pokemon.id)}>
+      <div className="card-inner">
+        <div className="card-front">
+          <img src={pokemon.image} alt={pokemon.name} />
+          <h3>{pokemon.name}</h3>
+        </div>
+        <div className="card-back"></div>
+      </div>
     </div>
   );
 }
